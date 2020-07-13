@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-class Spree::Admin::QuotesController < ApplicationController
+class Spree::Admin::QuotesController < Spree::Admin::BaseController
   def index
-    @quotes = Spree::QuotesHistory.all
+    @quotes = Spree::QuoteHistory.all
   end
 
   def send_quote
-    car = Spree::Car.find(quote_params[:car_id])
+    car = Spree::Product.find(quote_params[:product_id])
     car.send_quote(quote_params[:email])
 
     redirect_to admin_quotes_path
@@ -15,6 +15,6 @@ class Spree::Admin::QuotesController < ApplicationController
   private
 
   def quote_params
-    params.require(:quote).permit(:car_id, :email)
+    params.require(:quote).permit(:product_id, :email)
   end
 end

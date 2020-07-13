@@ -4,7 +4,7 @@
       <div data-hook="new_product_prototype" class="col-12 col-md-4">
         <%= f.field_container :car, class: ['form-group'] do %>
           <%= f.label :car %>
-          <%= f.collection_select :car_id, Spree::Car.all, :id, :name, {include_blank: true}, {class: 'select2'} %>
+          <%= f.collection_select :product_id, Spree::Product.all, :id, :name, {include_blank: true}, {class: 'select2'} %>
         <% end %>
       </div>
 
@@ -15,8 +15,14 @@
           <%= f.error_message_on :email %>
         <% end %>
       </div>
+      <div>
+          <%= 'quote will be send to given email' %> <span class="required">*</span>
+          <%= f.submit class: 'form-control btn btn-primary', value: "Submit" %>
+        
+      </div>
     </div>
   </fieldset>
+
 <% end %>
 <table class="table" id="listing_products">
     <thead>

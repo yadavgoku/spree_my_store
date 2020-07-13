@@ -629,20 +629,20 @@ ActiveRecord::Schema.define(version: 2020_07_13_054756) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "spree_quotes", force: :cascade do |t|
-    t.decimal "ex_showroom_price", precision: 15, scale: 2, default: "0.0", null: false
-    t.decimal "rto", precision: 15, scale: 2, default: "0.0", null: false
-    t.decimal "insurance", precision: 15, scale: 2, default: "0.0", null: false
-    t.integer "car_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "spree_quotes_histories", force: :cascade do |t|
+  create_table "spree_quote_histories", force: :cascade do |t|
     t.string "to", null: false
     t.string "car", null: false
     t.string "status", default: "sent"
     t.integer "quote_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "spree_quotes", force: :cascade do |t|
+    t.decimal "ex_showroom_price", precision: 15, scale: 2, default: "0.0", null: false
+    t.decimal "rto", precision: 15, scale: 2, default: "0.0", null: false
+    t.decimal "insurance", precision: 15, scale: 2, default: "0.0", null: false
+    t.integer "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
