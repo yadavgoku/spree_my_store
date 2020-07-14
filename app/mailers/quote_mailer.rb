@@ -2,9 +2,9 @@
 
 class QuoteMailer < ApplicationMailer
   def send_quote
-    @email = params[:email]
-    @car = params[:car]
-    @quote = @car.quote
+    @quote = params[:quote]
+    @email = @quote.to
+    @car = @quote.product
     mail(to: @email, subject: 'Mini shop login with otp')
   end
 end

@@ -2,17 +2,15 @@
 
 module Spree::ProductDecorator
   def self.prepended(base)
-    base.after_create :build_quote
-    base.has_one :quote
+    base.has_many :quotes
   end
 
-  def build_quote
-    Spree::Quote.create(product_id: id)
-  end
-
-  def send_quote(email)
-    QuoteMailer.with(car: self, email: email).send_quote.deliver_now
-    Spree::QuoteHistory.create(to: email, car: name, quote_id: quote.id)
+  def variant(location_id)
+    variants.each do |variant|
+      @value = variant.option_values.find_by(id: location_id)
+      return variant if @value
+    end
+    return if @value
   end
 end
 ::Spree::Product.prepend(Spree::ProductDecorator)

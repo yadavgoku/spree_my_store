@@ -1,21 +1,27 @@
-<%= form_for(:quote, url: send_quote_admin_quotes_path, html: { multipart: true }) do |f| %>
+<%= form_for(:quote, url: admin_quotes_path, html: { multipart: true }) do |f| %>
   <fieldset data-hook="new_product">
     <div data-hook="new_product_attrs" class="row">
-      <div data-hook="new_product_prototype" class="col-12 col-md-4">
+      <div data-hook="new_product_prototype" class="col-12 col-md-3">
         <%= f.field_container :car, class: ['form-group'] do %>
           <%= f.label :car %>
           <%= f.collection_select :product_id, Spree::Product.all, :id, :name, {include_blank: true}, {class: 'select2'} %>
         <% end %>
       </div>
 
-      <div data-hook="new_product_price" class="col-12 col-md-4">
+      <div data-hook="new_product_price" class="col-12 col-md-3">
         <%= f.field_container :email, class: ['form-group'] do %>
           <%= f.label :email %> <span class="required">*</span>
           <%= f.email_field :email, class: 'form-control', required: :required %>
           <%= f.error_message_on :email %>
         <% end %>
       </div>
-      <div>
+      <div data-hook="new_product_price" class="col-12 col-md-3">
+        <%= f.field_container :location, class: ['form-group'] do %>
+          <%= f.label :location %> <span class="required">*</span>
+          <%= f.collection_select :location_id, @option_type.option_values, :id, :presentation, {include_blank: true}, {class: 'select2'} %>
+        <% end %>
+      </div>
+      <div class="col-12 col-md-3">
           <%= 'quote will be send to given email' %> <span class="required">*</span>
           <%= f.submit class: 'form-control btn btn-primary', value: "Submit" %>
         
@@ -30,20 +36,21 @@
         <th>Id</th>
         <th>To</th>
         <th>Car</th>
-
-        <th colspan="2">quote_id</th>
+        <th>Location</th>
+        <th colspan="2">Ex-Showroom Price</th>
         
         <th data-hook="admin_products_index_header_actions" class="actions"></th>
       </tr>
     </thead>
     <tbody>
       <% @quotes.each do |quote| %>
+      <% car = Spree::Product.find(quote.product_id) %>
           <tr data-hook="admin_products_index_rows" class="<%= cycle('odd', 'even') %>">
             <td><%= link_to quote.try(:id), edit_admin_quote_path(quote) %></td>
             <td class="sku"><%= quote.to rescue '' %></td>
-            <td class="status"><%= quote.car %> </td>
-            <td class="image"><%= quote. quote_id %></td>
-            
+            <td class="status"><%= car.name %> </td>
+            <td class="image"><%= quote.location %></td>
+            <td class="image"><%= quote.ex_showroom_price %></td>
             <td class="actions actions-3 text-right" data-hook="admin_products_index_row_actions">
             </td>
             

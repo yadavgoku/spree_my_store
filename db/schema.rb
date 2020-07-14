@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_13_054756) do
+ActiveRecord::Schema.define(version: 2020_07_10_065827) do
 
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
@@ -141,12 +141,6 @@ ActiveRecord::Schema.define(version: 2020_07_13_054756) do
     t.index ["calculable_id", "calculable_type"], name: "index_spree_calculators_on_calculable_id_and_calculable_type"
     t.index ["deleted_at"], name: "index_spree_calculators_on_deleted_at"
     t.index ["id", "type"], name: "index_spree_calculators_on_id_and_type"
-  end
-
-  create_table "spree_cars", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "spree_countries", force: :cascade do |t|
@@ -629,19 +623,11 @@ ActiveRecord::Schema.define(version: 2020_07_13_054756) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "spree_quote_histories", force: :cascade do |t|
-    t.string "to", null: false
-    t.string "car", null: false
-    t.string "status", default: "sent"
-    t.integer "quote_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "spree_quotes", force: :cascade do |t|
+    t.string "to", null: false
+    t.string "location"
     t.decimal "ex_showroom_price", precision: 15, scale: 2, default: "0.0", null: false
-    t.decimal "rto", precision: 15, scale: 2, default: "0.0", null: false
-    t.decimal "insurance", precision: 15, scale: 2, default: "0.0", null: false
+    t.string "status", default: "initiated"
     t.integer "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
