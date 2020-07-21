@@ -13,5 +13,9 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :quotes
     end
+
+    namespace :frontend do
+      resources :wishlist_items, only: [:create, :destroy]
+    end
   end
 end

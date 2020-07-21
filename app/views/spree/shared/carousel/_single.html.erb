@@ -6,6 +6,34 @@
   data-interval="false"
   data-hook
 >
+
+
+<div class="alert alert-success alert-dismissible fade" role="alert" id="addWishlistAlert">
+      <strong>Success!</strong> Added to wishlist.
+</div>
+<div class="alert alert-warning alert-dismissible fade" role="alert" id="removeWishlistAlert">
+      <strong>Success!</strong> Removed from wishlist.
+</div>
+
+
+
+<% wishlist = spree_current_user.wishlist_items.reload.find_by(product_id: @product.id) %>
+
+
+<% if wishlist %>
+  <%= button_to frontend_wishlist_item_path(wishlist.id,product_id: @product.id),method: :delete, id: 'removeWishlistButton', class: 'float-right rounded-circle border-0' do %>
+  
+  <img src="https://img.icons8.com/emoji/15/000000/red-heart.png"/>
+  <% end %>
+<% else %>
+  <%= button_to frontend_wishlist_items_path(product_id: @product.id),method: :post, id: 'addWishlistButton', class: 'float-right rounded-circle border-0' do %>
+    <img src="https://img.icons8.com/ios/15/000000/hearts.png"/>
+  <% end %>
+<% end %>
+
+
+
+
   <% if images.length > 1 %>
     <a
       class="d-none d-md-flex h-100 justify-content-center align-items-center product-carousel-control position-absolute product-carousel-control--previous"
@@ -39,8 +67,11 @@
   <% end %>
 
   <div class="carousel-inner">
+
     <div class="d-flex flex-row position-absolute product-carousel-overlay">
+
       <div class="d-none d-lg-block <%= 'product-carousel-overlay-modal-opener' unless zoomed %>" <%= 'data-toggle=modal data-target=#picturesModal' unless zoomed %>></div>
+
     </div>
 
     <% images.each_with_index do |image, imageIndex| %>
@@ -49,7 +80,9 @@
         data-variant-is-master="<%= image.viewable_id == @product.master_id %>"
         data-variant-id="<%= image.viewable_id %>"
       >
+
         <div class="product-carousel-item-squared <%= 'product-carousel-item-squared-only' if images.length == 1 %>">
+          
           <% image_attrs = {
             src: main_app.url_for(image.url(zoomed ? :zoomed : :large)),
             alt: image.alt || @product.name,
@@ -81,3 +114,13 @@
     <% end %>
   </ul>
 </div>
+
+
+
+<script type="text/javascript">
+  $("#addWishlistButton").click(function(){
+      $("#addWishlistAlert").addClass('show') //Shows Bootstrap alert
+})
+
+</script>
+
