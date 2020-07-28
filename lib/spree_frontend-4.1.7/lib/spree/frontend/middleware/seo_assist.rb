@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Make redirects for SEO needs
 module Spree
   module Frontend
@@ -18,7 +20,7 @@ module Spree
             params.delete('taxon')
 
             return build_response(params, "#{request.script_name}t/#{taxon.permalink}")
-          elsif env['PATH_INFO'] =~ /^\/(t|products)(\/\S+)?\/$/
+          elsif env['PATH_INFO'] =~ %r{^/(t|products)(/\S+)?/$}
             # ensures no trailing / for taxon and product urls
 
             return build_response(params, env['PATH_INFO'][0...-1])
@@ -32,7 +34,7 @@ module Spree
         def build_response(params, location)
           query = build_query(params)
           location += '?' + query unless query.blank?
-          [301, { 'Location' => location }, []]
+          [301, { Location: location }, []]
         end
 
         def build_query(params)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spree
   module Admin
     class OrdersController < Spree::Admin::BaseController
@@ -47,9 +49,9 @@ module Spree
         # lazy loading other models here (via includes) may result in an invalid query
         # e.g. SELECT  DISTINCT DISTINCT "spree_orders".id, "spree_orders"."created_at" AS alias_0 FROM "spree_orders"
         # see https://github.com/spree/spree/pull/3919
-        @orders = @search.result(distinct: true).
-                  page(params[:page]).
-                  per(params[:per_page] || Spree::Config[:admin_orders_per_page])
+        @orders = @search.result(distinct: true)
+                         .page(params[:page])
+                         .per(params[:per_page] || Spree::Config[:admin_orders_per_page])
 
         # Restore dates
         params[:q][:created_at_gt] = created_at_gt
@@ -84,7 +86,7 @@ module Spree
           @order.update_with_updater!
           unless @order.completed?
             # Jump to next step if order is not completed.
-            redirect_to admin_order_customer_path(@order) and return
+            redirect_to(admin_order_customer_path(@order)) && return
           end
         else
           @order.errors.add(:line_items, Spree.t('errors.messages.blank')) if @order.line_items.empty?
@@ -158,7 +160,7 @@ module Spree
 
       # Used for extensions which need to provide their own custom event links on the order details view.
       def initialize_order_events
-        @order_events = %w{approve cancel resume}
+        @order_events = %w[approve cancel resume]
       end
 
       def model_class

@@ -22,3 +22,5 @@ test:
 production:
   <<: *default
   database: spree
+  username: joker
+  password: joker

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spree
   module Admin
     class ProductsController < ResourceController
@@ -123,10 +125,10 @@ module Spree
         # Temporarily remove params[:q][:deleted_at_null] from params[:q] to ransack products.
         # This is to include all products and not just deleted products.
         @search = @collection.ransack(params[:q].reject { |k, _v| k.to_s == 'deleted_at_null' })
-        @collection = @search.result.
-                      includes(product_includes).
-                      page(params[:page]).
-                      per(params[:per_page] || Spree::Config[:admin_products_per_page])
+        @collection = @search.result
+                             .includes(product_includes)
+                             .page(params[:page])
+                             .per(params[:per_page] || Spree::Config[:admin_products_per_page])
         @collection
       end
 

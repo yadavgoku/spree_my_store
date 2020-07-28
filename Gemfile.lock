@@ -1,4 +1,27 @@
 GIT
+  remote: https://github.com/ronzalo/spree_searchkick.git
+  revision: 81ee4b677cd66f591525708c37f1364a9df0fb00
+  branch: 4-0-stable
+  specs:
+    spree_searchkick (3.1.0)
+      searchkick
+      spree_core (>= 4.0, < 5.0)
+
+GIT
+  remote: https://github.com/spree-contrib/spree-multi-domain.git
+  revision: c997e451a85e248c6b869786a560ade62f8ea78e
+  branch: rails_6_spree_4
+  specs:
+    spree_multi_domain (3.3.1)
+      deface (~> 1.0)
+      spree_analytics_trackers
+      spree_api (>= 3.1.0, < 5.0)
+      spree_backend (>= 3.1.0, < 5.0)
+      spree_core (>= 3.1.0, < 5.0)
+      spree_extension
+      spree_frontend (>= 3.1.0, < 5.0)
+
+GIT
   remote: https://github.com/spree-contrib/spree_shared.git
   revision: 14493edfc4766c3e7111fa9ce241338aa0f84cf6
   branch: master
@@ -7,6 +30,15 @@ GIT
       ros-apartment (>= 2.6.0)
       spree_core (~> 4.0)
       spree_sample (~> 4.0)
+
+GIT
+  remote: https://github.com/vinsol-spree-contrib/spree_one_page_stock_management.git
+  revision: a1606dce5e01d67db6d136287174572d8fb232ca
+  branch: 4_1_stable
+  specs:
+    spree_one_page_stock_management (0.0.1.alpha)
+      spree_core (~> 4.0)
+      spree_extension
 
 GEM
   remote: https://rubygems.org/
@@ -124,8 +156,18 @@ GEM
       devise (>= 2.1.0)
     doorkeeper (5.4.0)
       railties (>= 5)
+    elasticsearch (7.8.0)
+      elasticsearch-api (= 7.8.0)
+      elasticsearch-transport (= 7.8.0)
+    elasticsearch-api (7.8.0)
+      multi_json
+    elasticsearch-transport (7.8.0)
+      faraday (~> 1)
+      multi_json
     erubi (1.9.0)
     execjs (2.7.0)
+    faraday (1.0.1)
+      multipart-post (>= 1.2, < 3)
     fast_jsonapi (1.5)
       activesupport (>= 4.2)
     ffaker (2.15.0)
@@ -135,6 +177,7 @@ GEM
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     glyphicons (1.0.2)
+    hashie (4.1.0)
     highline (2.0.3)
     htmlentities (4.3.4)
     i18n (1.8.3)
@@ -186,6 +229,8 @@ GEM
     money (6.13.8)
       i18n (>= 0.6.4, <= 2)
     msgpack (1.3.3)
+    multi_json (1.15.0)
+    multipart-post (2.1.1)
     nio4r (2.5.2)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
@@ -273,6 +318,10 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    searchkick (4.4.1)
+      activemodel (>= 5)
+      elasticsearch (>= 6)
+      hashie
     select2-rails (3.5.10)
       thor (~> 0.14)
     selenium-webdriver (3.142.7)
@@ -285,6 +334,11 @@ GEM
       spree_core (= 4.1.7)
       spree_frontend (= 4.1.7)
       spree_sample (= 4.1.7)
+    spree_analytics_trackers (1.1.0)
+      deface (~> 1.0)
+      spree_backend (>= 3.1.0, < 5.0)
+      spree_core (>= 3.1.0, < 5.0)
+      spree_extension
     spree_api (4.1.7)
       doorkeeper (~> 5.2, >= 5.2.1)
       fast_jsonapi (~> 1.5)
@@ -415,10 +469,15 @@ DEPENDENCIES
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.2)
   sass-rails (>= 6)
+  searchkick
   selenium-webdriver
   spree (~> 4.1)
+  spree_analytics_trackers
   spree_auth_devise (~> 4.1)
   spree_gateway (~> 3.7)
+  spree_multi_domain!
+  spree_one_page_stock_management!
+  spree_searchkick!
   spree_shared!
   spring
   spring-watcher-listen (~> 2.0.0)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spree
   module Admin
     module NavigationHelper
@@ -86,14 +88,16 @@ module Spree
           end
         else
           per_page_default = Spree::Config.admin_orders_per_page
-          per_page_options = %w{15 30 45 60}
+          per_page_options = %w[15 30 45 60]
         end
 
         selected_option = params[:per_page].try(:to_i) || per_page_default
 
-        select_tag(:per_page,
-                   options_for_select(per_page_options, selected_option),
-                   class: "form-control pull-right js-per-page-select per-page-selected-#{selected_option}")
+        select_tag(
+          :per_page,
+          options_for_select(per_page_options, selected_option),
+          class: "form-control pull-right js-per-page-select per-page-selected-#{selected_option}"
+        )
       end
 
       # helper method to create proper url to apply per page filtering
@@ -183,15 +187,15 @@ module Spree
           options.merge(
             type: button_type,
             class: "btn btn-primary #{options[:class]}",
-            'data-disable-with' => "#{Spree.t(:saving)}..."
+            "data-disable-with": "#{Spree.t(:saving)}..."
           )
         )
       end
 
       def button_link_to(text, url, html_options = {})
         if html_options[:method] &&
-            !html_options[:method].to_s.casecmp('get').zero? &&
-            !html_options[:remote]
+           !html_options[:method].to_s.casecmp('get').zero? &&
+           !html_options[:remote]
           form_tag(url, method: html_options.delete(:method), class: 'd-inline') do
             button(text, html_options.delete(:icon), nil, html_options)
           end
@@ -216,8 +220,8 @@ module Spree
 
       def configurations_sidebar_menu_item(link_text, url, options = {})
         is_selected = url.ends_with?(controller.controller_name) ||
-          url.ends_with?("#{controller.controller_name}/edit") ||
-          url.ends_with?("#{controller.controller_name.singularize}/edit")
+                      url.ends_with?("#{controller.controller_name}/edit") ||
+                      url.ends_with?("#{controller.controller_name.singularize}/edit")
 
         options[:class] = 'sidebar-menu-item d-block w-100'
         options[:class] << ' selected' if is_selected

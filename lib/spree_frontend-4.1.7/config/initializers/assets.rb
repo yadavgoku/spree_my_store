@@ -1,4 +1,6 @@
-Rails.application.config.assets.precompile += %w(
+# frozen_string_literal: true
+
+Rails.application.config.assets.precompile += %w[
   favicon.ico
   credit_cards/*
   spree/frontend/checkout/shipment
@@ -10,4 +12,4 @@ Rails.application.config.assets.precompile += %w(
   arrow.svg
   check-mark-circle.svg
   error.svg
-)
+]

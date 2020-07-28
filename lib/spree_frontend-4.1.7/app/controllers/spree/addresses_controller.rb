@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # https://github.com/spree-contrib/spree_address_book/blob/master/app/controllers/spree/addresses_controller.rb
 module Spree
   class AddressesController < Spree::StoreController

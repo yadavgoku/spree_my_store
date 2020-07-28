@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spree
   # This is somewhat contrary to standard REST convention since there is not
   # actually a Checkout object. There's enough distinct logic specific to
@@ -174,14 +176,14 @@ module Spree
         params.delete(:payment_source)
 
         # Return to the Payments page if additional payment is needed.
-        redirect_to checkout_state_path(@order.state) and return if @order.payments.valid.sum(:amount) < @order.total
+        redirect_to(checkout_state_path(@order.state)) && return if @order.payments.valid.sum(:amount) < @order.total
       end
     end
 
     def remove_store_credit_payments
       if params.key?(:remove_store_credit)
         remove_store_credit_service.call(order: @order)
-        redirect_to checkout_state_path(@order.state) and return
+        redirect_to(checkout_state_path(@order.state)) && return
       end
     end
 

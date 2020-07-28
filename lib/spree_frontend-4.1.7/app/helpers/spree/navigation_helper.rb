@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'digest'
 
 module Spree
@@ -6,7 +8,7 @@ module Spree
       SpreeStorefrontConfig.dig(current_store.code, :navigation) || SpreeStorefrontConfig.dig(:default, :navigation) || []
     # safeguard for older Spree installs that don't have spree_navigation initializer
     # or spree.yml file present
-    rescue
+    rescue StandardError
       []
     end
 

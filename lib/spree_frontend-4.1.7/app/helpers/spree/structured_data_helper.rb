@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spree
   module StructuredDataHelper
     def products_structured_data(products)

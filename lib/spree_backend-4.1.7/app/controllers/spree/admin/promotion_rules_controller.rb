@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Spree::Admin::PromotionRulesController < Spree::Admin::BaseController
   helper 'spree/admin/promotion_rules'
 
@@ -36,7 +38,7 @@ class Spree::Admin::PromotionRulesController < Spree::Admin::BaseController
   def validate_promotion_rule_type
     requested_type = params[:promotion_rule].delete(:type)
     promotion_rule_types = Rails.application.config.spree.promotions.rules
-    @promotion_rule_type = promotion_rule_types.detect do |klass|
+    @promotion_rule_type = promotion_rule_types.find do |klass|
       klass.name == requested_type
     end
     unless @promotion_rule_type

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spree
   module Admin
     class StockTransfersController < Admin::BaseController
@@ -6,10 +8,10 @@ module Spree
       def index
         @q = StockTransfer.ransack(params[:q])
 
-        @stock_transfers = @q.result.
-                           includes(stock_movements: { stock_item: :stock_location }).
-                           order(created_at: :desc).
-                           page(params[:page])
+        @stock_transfers = @q.result
+                             .includes(stock_movements: { stock_item: :stock_location })
+                             .order(created_at: :desc)
+                             .page(params[:page])
       end
 
       def show
@@ -28,9 +30,11 @@ module Spree
             variants[variant_id] += params[:quantity][i].to_i
           end
           stock_transfer = StockTransfer.create(reference: params[:reference])
-          stock_transfer.transfer(source_location,
-                                  destination_location,
-                                  variants)
+          stock_transfer.transfer(
+            source_location,
+            destination_location,
+            variants
+          )
 
           flash[:success] = Spree.t(:stock_successfully_transferred)
           redirect_to admin_stock_transfer_path(stock_transfer)

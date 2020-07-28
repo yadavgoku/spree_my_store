@@ -1,4 +1,5 @@
-# encoding: UTF-8
+# frozen_string_literal: true
+
 require_relative '../core/lib/spree/core/version.rb'
 
 Gem::Specification.new do |s|
@@ -15,7 +16,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'http://spreecommerce.org'
   s.license     = 'BSD-3-Clause'
 
-  s.files        = `git ls-files`.split("\n").reject { |f| f.match(/^spec/) && !f.match(/^spec\/fixtures/) }
+  s.files        = `git ls-files`.split("\n").reject { |f| f.match(/^spec/) && !f.match(%r{^spec/fixtures}) }
   s.require_path = 'lib'
   s.requirements << 'none'
 
@@ -23,12 +24,12 @@ Gem::Specification.new do |s|
   s.add_dependency 'spree_core', s.version
 
   s.add_dependency 'bootstrap',       '~> 4.3.1'
-  s.add_dependency 'glyphicons',      '~> 1.0.2'
   s.add_dependency 'canonical-rails', '~> 0.2.5'
+  s.add_dependency 'glyphicons',      '~> 1.0.2'
   s.add_dependency 'inline_svg',      '~> 1.5'
   s.add_dependency 'jquery-rails',    '~> 4.3'
-  s.add_dependency 'turbolinks',      '~> 5.2.0'
   s.add_dependency 'select2-rails',   '~> 3.5.0'
+  s.add_dependency 'turbolinks',      '~> 5.2.0'
 
   s.add_development_dependency 'capybara-accessible'
 end

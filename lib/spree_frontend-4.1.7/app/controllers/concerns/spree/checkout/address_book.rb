@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # https://github.com/spree-contrib/spree_address_book/blob/master/app/controllers/spree/checkout_controller_decorator.rb
 module Spree
   module Checkout

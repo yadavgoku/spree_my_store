@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spree
   module Admin
     class VariantsController < ResourceController
@@ -41,11 +43,10 @@ module Spree
       def collection
         @deleted = params.key?(:deleted) && params[:deleted] == 'on' ? 'checked' : ''
 
-        @collection ||=
-          if @deleted.blank?
-            super.includes(:default_price, option_values: :option_type)
-          else
-            Variant.only_deleted.where(product_id: parent.id)
+        @collection ||= if @deleted.blank?
+                          super.includes(:default_price, option_values: :option_type)
+                        else
+                          Variant.only_deleted.where(product_id: parent.id)
           end
         @collection
       end

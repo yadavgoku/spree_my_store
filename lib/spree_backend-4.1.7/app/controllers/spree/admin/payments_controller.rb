@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spree
   module Admin
     class PaymentsController < Spree::Admin::BaseController
@@ -63,7 +65,7 @@ module Spree
       end
 
       def fire
-        return unless event = params[:e] and @payment.payment_source
+        return unless (event = params[:e]) && @payment.payment_source
 
         # Because we have a transition method also called void, we do this to avoid conflicts.
         event = 'void_transaction' if event == 'void'
@@ -72,8 +74,8 @@ module Spree
         else
           flash[:error] = Spree.t(:cannot_perform_operation)
         end
-      rescue Spree::Core::GatewayError => ge
-        flash[:error] = ge.message.to_s
+      rescue Spree::Core::GatewayError => e
+        flash[:error] = e.message.to_s
       ensure
         redirect_to admin_order_payments_path(@order)
       end
@@ -81,7 +83,7 @@ module Spree
       private
 
       def object_params
-        if params[:payment] and params[:payment_source] and source_params = params.delete(:payment_source)[params[:payment][:payment_method_id]]
+        if params[:payment] && params[:payment_source] && (source_params = params.delete(:payment_source)[params[:payment][:payment_method_id]])
           params[:payment][:source_attributes] = source_params
         end
 

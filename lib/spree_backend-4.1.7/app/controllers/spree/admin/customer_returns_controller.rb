@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spree
   module Admin
     class CustomerReturnsController < ResourceController
@@ -36,10 +38,10 @@ module Spree
 
       def collection
         parent # trigger loading the order
-        @collection ||= Spree::ReturnItem.
-                        accessible_by(current_ability).
-                        where(inventory_unit_id: @order.inventory_units.pluck(:id)).
-                        map(&:customer_return).uniq.compact
+        @collection ||= Spree::ReturnItem
+                        .accessible_by(current_ability)
+                        .where(inventory_unit_id: @order.inventory_units.pluck(:id))
+                        .map(&:customer_return).uniq.compact
         @customer_returns = @collection
       end
 

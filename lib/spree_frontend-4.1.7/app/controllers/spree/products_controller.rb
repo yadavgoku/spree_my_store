@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spree
   class ProductsController < Spree::StoreController
     include Spree::ProductsHelper
@@ -65,9 +67,9 @@ module Spree
                     Product.active(current_currency)
                   end
 
-      @product = @products.includes(:master).
-                 friendly.
-                 find(params[:id])
+      @product = @products.includes(:master)
+                          .friendly
+                          .find(params[:id])
     end
 
     def load_taxon
@@ -75,11 +77,11 @@ module Spree
     end
 
     def load_variants
-      @variants = @product.
-                  variants_including_master.
-                  spree_base_scopes.
-                  active(current_currency).
-                  includes(
+      @variants = @product
+                  .variants_including_master
+                  .spree_base_scopes
+                  .active(current_currency)
+                  .includes(
                     :default_price,
                     option_values: [:option_value_variants],
                     images: { attachment_attachment: :blob }
@@ -102,7 +104,7 @@ module Spree
         @product,
         @taxon,
         @product.possible_promotion_ids,
-        @product.possible_promotions.maximum(:updated_at),
+        @product.possible_promotions.maximum(:updated_at)
       ]
     end
   end

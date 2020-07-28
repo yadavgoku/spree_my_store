@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Spree::Admin::ResourceController < Spree::Admin::BaseController
   include Spree::Backend::Callbacks
 
@@ -179,7 +181,7 @@ class Spree::Admin::ResourceController < Spree::Admin::BaseController
     return parent.send(controller_name) if parent_data.present?
 
     if model_class.respond_to?(:accessible_by) &&
-        !current_ability.has_block?(params[:action], model_class)
+       !current_ability.has_block?(params[:action], model_class)
       model_class.accessible_by(current_ability, action)
     else
       model_class.where(nil)

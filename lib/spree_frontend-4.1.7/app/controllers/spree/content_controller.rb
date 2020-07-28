@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spree
   class ContentController < Spree::StoreController
     # Don't serve local files or static assets

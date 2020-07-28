@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module Spree
   module Admin
     module BaseHelper
       def flash_alert(flash)
         if flash.present?
-          close_button = button_tag(class: 'close', 'data-dismiss' => 'alert', 'aria-label' => Spree.t(:close)) do
-            content_tag('span', '&times;'.html_safe, 'aria-hidden' => true)
+          close_button = button_tag(class: 'close', "data-dismiss": 'alert', "aria-label": Spree.t(:close)) do
+            content_tag('span', '&times;'.html_safe, "aria-hidden": true)
           end
           message = flash[:error] || flash[:notice] || flash[:success]
           flash_class = 'danger' if flash[:error]
@@ -110,9 +112,11 @@ module Spree
                           }
                         end
 
-        field_options.merge!(readonly: options[:readonly],
-                             disabled: options[:disabled],
-                             size: options[:size])
+        field_options.merge!(
+          readonly: options[:readonly],
+          disabled: options[:disabled],
+          size: options[:size]
+        )
       end
 
       def preference_fields(object, form)
@@ -130,14 +134,15 @@ module Spree
       # renders hidden field and link to remove record using nested_attributes
       def link_to_icon_remove_fields(form)
         url = form.object.persisted? ? [:admin, form.object] : '#'
-        link_to_with_icon('delete', '', url,
-                          class: 'spree_remove_fields btn btn-sm btn-danger',
-                          data: {
-                            action: 'remove'
-                          },
-                          title: Spree.t(:remove),
-                          no_text: true
-                         ) + form.hidden_field(:_destroy)
+        link_to_with_icon(
+          'delete', '', url,
+          class: 'spree_remove_fields btn btn-sm btn-danger',
+          data: {
+            action: 'remove'
+          },
+          title: Spree.t(:remove),
+          no_text: true
+        ) + form.hidden_field(:_destroy)
       end
 
       def spree_dom_id(record)

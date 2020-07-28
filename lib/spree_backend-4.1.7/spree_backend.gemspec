@@ -1,4 +1,5 @@
-# encoding: UTF-8
+# frozen_string_literal: true
+
 require_relative '../core/lib/spree/core/version.rb'
 
 Gem::Specification.new do |s|
@@ -15,7 +16,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'http://spreecommerce.org'
   s.license     = 'BSD-3-Clause'
 
-  s.files        = `git ls-files`.split("\n").reject { |f| f.match(/^spec/) && !f.match(/^spec\/fixtures/) }
+  s.files        = `git ls-files`.split("\n").reject { |f| f.match(/^spec/) && !f.match(%r{^spec/fixtures}) }
   s.require_path = 'lib'
   s.requirements << 'none'
 

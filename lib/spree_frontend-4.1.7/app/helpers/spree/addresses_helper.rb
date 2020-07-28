@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # https://github.com/spree-contrib/spree_address_book/blob/master/app/helpers/spree/addresses_helper.rb
 module Spree
   module AddressesHelper
@@ -9,10 +11,12 @@ module Spree
           is_required = Spree::Address.required_fields.include?(method)
           method_name = I18n.t("activerecord.attributes.spree/address.#{method}")
           required = Spree.t(:required)
-          form.text_field(method,
-                          class: [is_required ? 'required' : nil, 'spree-flat-input'].compact,
-                          required: is_required,
-                          placeholder: is_required ? "#{method_name} #{required}" : method_name)
+          form.text_field(
+            method,
+            class: [is_required ? 'required' : nil, 'spree-flat-input'].compact,
+            required: is_required,
+            placeholder: is_required ? "#{method_name} #{required}" : method_name
+          )
         end
       end
     end
@@ -21,11 +25,13 @@ module Spree
       country ||= Spree::Country.find(Spree::Config[:default_country_id])
       have_states = country.states.any?
       state_elements = [
-        form.collection_select(:state_id, country.states.order(:name),
-                              :id, :name,
-                               { prompt: Spree.t(:state).upcase },
-                               class: have_states ? 'required form-control spree-flat-select' : 'hidden',
-                               disabled: !have_states) +
+        form.collection_select(
+          :state_id, country.states.order(:name),
+          :id, :name,
+          { prompt: Spree.t(:state).upcase },
+          class: have_states ? 'required form-control spree-flat-select' : 'hidden',
+          disabled: !have_states
+        ) +
           form.text_field(:state_name, class: !have_states ? 'required' : 'hidden', disabled: have_states) +
           image_tag('arrow.svg', class: 'position-absolute spree-flat-select-arrow')
       ].join.tr('"', "'").delete("\n")

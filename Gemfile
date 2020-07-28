@@ -14,9 +14,16 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'spree', '~> 4.1'
 gem 'spree_auth_devise', '~> 4.1'
 gem 'spree_gateway', '~> 3.7'
-gem 'spree_shared', github: 'spree-contrib/spree_shared', branch: 'master'
 gem 'pg', '>= 0.18', '< 2.0'
+gem 'spree_shared', github: 'spree-contrib/spree_shared', branch: 'master'
+gem 'spree_analytics_trackers'
+gem 'spree_multi_domain', github: 'spree-contrib/spree-multi-domain', branch: 'rails_6_spree_4'
+gem 'spree_one_page_stock_management', github: 'vinsol-spree-contrib/spree_one_page_stock_management', branch: '4_1_stable'
+# gem 'spree_abandoned_carts', github: 'freego/spree_abandoned_carts', branch: '4_1_stable'
+gem 'searchkick'
+gem 'spree_searchkick', github: 'ronzalo/spree_searchkick', branch: '4-0-stable'
 
+  
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
